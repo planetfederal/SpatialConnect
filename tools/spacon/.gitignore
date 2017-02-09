@@ -1,0 +1,12 @@
+Commands.h
+Commands.java
+SCCommand.java
+Scmessage.pbobjc.*
+SCMessageOuterClass.java
+node_modules
+src
+build
+.gradle
+.DS_Store
+spatialconnect*
+.spaconrc
