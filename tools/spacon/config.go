@@ -13,6 +13,16 @@ type Configuration struct {
 	Upstream string
 }
 
+//ProjectCommands for project.json
+type ProjectCommands struct {
+	Build           string
+	Install         string
+	UnitTest        string `json:"unit_test"`
+	IntegrationTest string `json:"integration_test"`
+	Run             string
+	Release         string
+}
+
 func readConfigFile() Configuration {
 	file, _ := os.Open(".spaconrc")
 	decoder := json.NewDecoder(file)
@@ -28,6 +38,17 @@ func writeConfigFile(c Configuration) {
 	configJSON, _ := json.Marshal(c)
 	err := ioutil.WriteFile(".spaconrc", configJSON, 0644)
 	if err != nil {
-		fmt.Errorf("%s", err)
+		fmt.Printf("%s", err)
 	}
+}
+
+func readProjectConfigFile(r Repo) ProjectCommands {
+	file, _ := os.Open(r.name + "/project.json")
+	decoder := json.NewDecoder(file)
+	commands := ProjectCommands{}
+	err := decoder.Decode(&commands)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	return commands
 }

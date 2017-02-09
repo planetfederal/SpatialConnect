@@ -1,19 +1,15 @@
 package main
 
 import (
-	"os"
+	"fmt"
 	"os/exec"
 	"strings"
-	"syscall"
 )
 
 func executeCmd(cmd string) error {
 	args := strings.Split(cmd, " ")
-
-	env := os.Environ()
-	binary, _ := exec.LookPath(args[0])
-	execErr := syscall.Exec(binary, args, env)
-	return execErr
+	fmt.Printf("%s\n", args)
+	return exec.Command(args[0], args[1:]...).Run()
 }
 
 func executeCmds(cmd []string) error {
