@@ -40,6 +40,8 @@ func handleCommand(p Project, cmd string) {
 		p.install()
 	case "build":
 		p.build()
+	case "run":
+		p.run()
 	case "clean":
 		p.clean()
 	case "clone":

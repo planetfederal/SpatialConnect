@@ -81,7 +81,12 @@ func (r Repo) build() {
 }
 
 func (r Repo) run() {
-
+	pc := readProjectConfigFile(r)
+	err := executeCmd(pc.Run)
+	if err != nil {
+		fmt.Printf("Can't Run")
+	}
+	os.Chdir("./..")
 }
 
 func (r Repo) unitTest() {
