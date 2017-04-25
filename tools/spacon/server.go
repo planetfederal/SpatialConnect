@@ -5,5 +5,5 @@ type Server interface {
 	build()
 	run()
 	test()
-	release()
+	deploy()
 }

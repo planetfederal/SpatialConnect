@@ -16,11 +16,9 @@ type Configuration struct {
 //ProjectCommands for project.json
 type ProjectCommands struct {
 	Build           string
-	Install         string
-	UnitTest        string `json:"unit_test"`
-	IntegrationTest string `json:"integration_test"`
+	Test            string `json:"unit_test"`
 	Run             string
-	Release         string
+	Deploy          string
 }
 
 func readConfigFile() Configuration {
