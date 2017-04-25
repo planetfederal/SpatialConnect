@@ -36,8 +36,6 @@ func handleAllCommand(proj map[string]Repo, cmd string) {
 
 func handleCommand(p Project, cmd string) {
 	switch cmd {
-	case "install":
-		p.install()
 	case "build":
 		p.build()
 	case "run":
@@ -48,8 +46,10 @@ func handleCommand(p Project, cmd string) {
 		p.clone()
 	case "checkout":
 		p.checkout(os.Args[3])
-	case "unit-test":
-		p.unitTest()
+	case "test":
+		p.test()
+	case "deploy":
+		p.deploy()
 	default:
 		fmt.Print("command not found\n")
 
