@@ -88,12 +88,11 @@ func (r Repo) test() {
 }
 
 func (r Repo) deploy() {
-	func (r Repo) deploy() {
-	    pc := readProjectConfigFile(r)
-	    os.Chdir("./" + r.name)
-	    err := executeCmd(pc.Deploy)
-	    if err != nil {
-	        fmt.Printf("Can't deploy")
+	pc := readProjectConfigFile(r)
+	os.Chdir("./" + r.name)
+	err := executeCmd(pc.Deploy)
+	if err != nil {
+	        scanner.PrintError(os.Stderr, err)
 	    }
 	    os.Chdir("./..")
 	}
