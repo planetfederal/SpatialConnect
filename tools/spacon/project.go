@@ -93,7 +93,7 @@ func (r Repo) deploy() {
 	    os.Chdir("./" + r.name)
 	    err := executeCmd(pc.Deploy)
 	    if err != nil {
-	        fmt.Printf("Can't deploy")
+	        scanner.PrintError(os.Stderr, err)
 	    }
 	    os.Chdir("./..")
 	}
