@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"go/scanner"
+	"os"
 )
 
 //Repo for holding data
@@ -30,16 +30,12 @@ func path(r Repo) string {
 func (r Repo) checkout(branch string) {
 	fmt.Printf("Checking out %s in %s\n", branch, r.name)
 	os.Chdir("./" + r.name)
-	err := executeCmds([]string{"git fetch --all", "git checkout -B " + branch + " origin/" + branch})
-	if err != nil {
-		scanner.PrintError(os.Stderr, err)
-		fmt.Printf("Error checking out branch:%s\n", branch)
-	}
+	executeCmds([]string{"git fetch --all", "git checkout -B " + branch + " origin/" + branch})
 	os.Chdir("..")
 }
 
 func (r Repo) clone() {
-	err := executeCmd("git clone git@github.com:" + path(r) + ".git")
+	err := executeCmd("git clone git@github.com:" + path(r) + ".git").Run()
 	if err != nil {
 		scanner.PrintError(os.Stderr, err)
 		fmt.Printf("Error cloning %s\n", path(r))
@@ -47,7 +43,7 @@ func (r Repo) clone() {
 		return
 	}
 	err = executeCmd("git --git-dir=./" + r.name + "/.git remote add upstream git@github.com:" +
-		r.cfg.Upstream + "/" + r.name + ".git")
+		r.cfg.Upstream + "/" + r.name + ".git").Run()
 	if err != nil {
 		scanner.PrintError(os.Stderr, err) // <-- here
 		fmt.Printf("Can't add remote alias:%s/%s\n", r.cfg.Upstream, r.name)
@@ -55,7 +51,7 @@ func (r Repo) clone() {
 }
 
 func (r Repo) clean() {
-	err := executeCmd("rm -rf " + r.name)
+	err := executeCmd("rm -rf " + r.name).Run()
 	if err != nil {
 		scanner.PrintError(os.Stderr, err) // <-- here
 		fmt.Printf("Can't remove the repo:%s\n", r.name)
@@ -65,7 +61,7 @@ func (r Repo) clean() {
 func (r Repo) build() {
 	pc := readProjectConfigFile(r)
 	os.Chdir("./" + r.name)
-	err := executeCmd(pc.Build)
+	err := executeCmd(pc.Build).Run()
 	if err != nil {
 		scanner.PrintError(os.Stderr, err)
 	}
@@ -74,7 +70,7 @@ func (r Repo) build() {
 
 func (r Repo) run() {
 	pc := readProjectConfigFile(r)
-	err := executeCmd(pc.Run)
+	err := executeCmd(pc.Run).Run()
 	if err != nil {
 		scanner.PrintError(os.Stderr, err)
 	}
@@ -84,7 +80,7 @@ func (r Repo) run() {
 func (r Repo) test() {
 	pc := readProjectConfigFile(r)
 	os.Chdir("./" + r.name)
-	err := executeCmd(pc.Test)
+	err := executeCmd(pc.Test).Run()
 	if err != nil {
 		scanner.PrintError(os.Stderr, err)
 	}
