@@ -90,10 +90,9 @@ func (r Repo) test() {
 func (r Repo) deploy() {
 	pc := readProjectConfigFile(r)
 	os.Chdir("./" + r.name)
-	err := executeCmd(pc.Deploy)
+	err := executeCmd(pc.Deploy).Run()
 	if err != nil {
-	        scanner.PrintError(os.Stderr, err)
-	    }
-	    os.Chdir("./..")
+		scanner.PrintError(os.Stderr, err)
 	}
+	os.Chdir("./..")
 }
