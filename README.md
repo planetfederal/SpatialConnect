@@ -23,7 +23,7 @@ For Android development, use the installers to install [Java](http://www.oracle.
 and [Android Studio](https://developer.android.com/studio/install.html).
 
 For iOS, download and install
-[Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12) from the App Store.
+[Xcode](https://itunes.apple.com/us/app/xcode/id497799835?mt=12) from the App Store.  You will also need to install the [command line tools](https://facebook.github.io/react-native/docs/getting-started.html#command-line-tools)
 
 Many of the projects also use Docker containers for running services locally,
 so make sure you [install Docker](https://docs.docker.com/docker-for-mac/install/#download-docker-for-mac).
